@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css'
 const App = () => {
   const [transactions, setTransactions] = useState([]);
-  const [month, setMonth] = useState('3'); // Default to March
+  const [month, setMonth] = useState('3'); 
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [statistics, setStatistics] = useState({});
@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     async function datab(){
       const p = await axios.get("http://localhost:5000/initialize-database");
-      const d = p.data; // Use `data` property directly
+      const d = p.data; 
       console.log("d", d);
 
     }
@@ -87,7 +87,7 @@ const App = () => {
     <div className="container">
       <h1>Transactions Dashboard</h1>
 
-      {/* Month Selector Dropdown */}
+      
       <label htmlFor="monthSelector">Select Month:</label>
       <select id="monthSelector" value={month} onChange={handleMonthChange}>
         {Array.from({ length: 12 }, (_, index) => (
@@ -97,7 +97,7 @@ const App = () => {
         ))}
       </select>
 
-      {/* Transactions Table */}
+      
       <table>
         <thead>
           <tr>
@@ -127,17 +127,14 @@ const App = () => {
         </tbody>
       </table>
 
-      {/* Search Box */}
       <label htmlFor="searchBox">Search Transaction:</label>
       <input type="text" id="searchBox" value={search} onChange={handleSearchChange} />
 
-      {/* Pagination Buttons */}
       <div>
         <button onClick={handlePrevPage}>Previous</button>
         <button onClick={handleNextPage}>Next</button>
       </div>
 
-      {/* Statistics Box */}
       <div className="statistics">
         <h2>Transactions Statistics</h2>
         <p>Total Sale Amount: {statistics.totalSaleAmount}</p>
@@ -145,7 +142,6 @@ const App = () => {
         <p>Total Not Sold Items: {statistics.totalNotSoldItems}</p>
       </div>
 
-      {/* Bar Chart */}
       <div>
         <h2>Transactions Bar Chart</h2>
         <ul>
