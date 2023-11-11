@@ -1,4 +1,5 @@
-import react,{useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
+import ApexChart from './ApexChart';
 import axios from 'axios';
 import './App.css'
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
 
       const barChartDataResponse = await fetchBarChartData();
       setBarChartData(barChartDataResponse);
-      console.log("work",statisticsResponse)
+      console.log("work",barChartDataResponse)
     } catch (error) {
       console.log("no")
       console.error(error);
@@ -82,6 +83,22 @@ const App = () => {
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
   };
+
+  function getMonthName(monthNumber) {
+    const months = [
+      'January', 'February', 'March', 'April',
+      'May', 'June', 'July', 'August',
+      'September', 'October', 'November', 'December'
+    ];
+  
+    // Adjust the monthNumber to be within a valid range (1-12)
+    const normalizedMonth = (monthNumber - 1 + 12) % 12;
+  
+    return months[normalizedMonth];
+  }
+  
+  
+  
 
   return (
     <div className="container">
@@ -143,14 +160,9 @@ const App = () => {
       </div>
 
       <div>
-        <h2>Transactions Bar Chart</h2>
-        <ul>
-          {barChartData.map((range) => (
-            <li key={range.range}>
-              {range.range}: {range.count} items
-            </li>
-          ))}
-        </ul>
+      <h2>Bar Chart Stats - {getMonthName(month)}</h2>
+        {barChartData&&<ApexChart barChartData={barChartData}/>}
+        
       </div>
     </div>
   );
